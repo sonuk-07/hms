@@ -1,0 +1,63 @@
+/* styles.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .login-form-box, .register-form-box {
+    max-width: 420px;
+    margin-top: 1rem;
+  }
+  
+  h2 {
+    font-weight: 700;
+    font-size: 28px;
+  }
+  
+  .form-heading {
+    font-weight: 600;
+    font-size: 22px;
+  }
+  
+  .form-subtext {
+    font-size: 15px;
+  }
+  
+  .btn-primary {
+    background-color: #1d6ff2;
+    border-color: #1d6ff2;
+  }
+  
+  .btn-primary:hover {
+    background-color: #155dd1;
+    border-color: #155dd1;
+  }
+  
+  .btn-outline-primary {
+    color: #1d6ff2;
+    border-color: #1d6ff2;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #1d6ff2;
+    color: #fff;
+  }
+  
+  .btn-outline-secondary {
+    color: #1d6ff2;
+    border-color: #d0d7df;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #e7f0ff;
+  }
+  
+  a.link-primary {
+    color: #1d6ff2;
+    text-decoration: none;
+  }
+  
+  a.link-primary:hover {
+    text-decoration: underline;
+  }
+  

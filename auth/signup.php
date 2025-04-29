@@ -1,4 +1,28 @@
-<?php /* signup.php */ ?>
+<?php 
+include '../Includes/dbConnection.php';
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+  $name = $_POST['full_name'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $confirmPassword = $_POST['confirm_password'];
+  $role = $_POST['role'];
+  if($password == $confirmPassword){
+    $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
+    $sql = "INSERT INTO users (name,email,password,role) VALUES(?,?,?,?)";
+    $stmt = mysqli_prepare($dbconn,$sql);
+    mysqli_stmt_bind_param($stmt,"ssss",$name,$email,$hashedPassword,$role);
+
+    if(mysqli_stmt_execute($stmt)){
+      header("Location:login.php");
+      exit();
+    }else{
+      echo "Error: ".mysqli_error($dbconn);
+    }
+  }else{
+    echo "Passwords donot match!";
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +42,7 @@
     <div class="register-form-box mx-auto shadow p-4 bg-white rounded-4">
       <h4 class="form-heading text-dark">Create an Account</h4>
       <p class="form-subtext text-muted">Register to access our hospital management system</p>
-      <form action="" method="POST">
+      <form action="signup.php" method="POST">
         <div class="mb-3">
           <label for="full-name" class="form-label">Full Name</label>
           <input type="text" class="form-control" id="full-name" name="full_name" placeholder="John Doe">

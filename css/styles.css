@@ -1,63 +1,121 @@
 /* styles.css */
+:root {
+  --primary-color: #1d6ff2;
+  --primary-hover: #155dd1;
+  --sidebar-color: #0d6efd;
+  --bg-color: #f8f9fa;
+  --text-light: #fff;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-  }
-  
-  .login-form-box, .register-form-box {
-    max-width: 420px;
-    margin-top: 1rem;
-  }
-  
-  h2 {
-    font-weight: 700;
-    font-size: 28px;
-  }
-  
-  .form-heading {
-    font-weight: 600;
-    font-size: 22px;
-  }
-  
-  .form-subtext {
-    font-size: 15px;
-  }
-  
-  .btn-primary {
-    background-color: #1d6ff2;
-    border-color: #1d6ff2;
-  }
-  
-  .btn-primary:hover {
-    background-color: #155dd1;
-    border-color: #155dd1;
-  }
-  
-  .btn-outline-primary {
-    color: #1d6ff2;
-    border-color: #1d6ff2;
-  }
-  
-  .btn-outline-primary:hover {
-    background-color: #1d6ff2;
-    color: #fff;
-  }
-  
-  .btn-outline-secondary {
-    color: #1d6ff2;
-    border-color: #d0d7df;
-  }
-  
-  .btn-outline-secondary:hover {
-    background-color: #e7f0ff;
-  }
-  
-  a.link-primary {
-    color: #1d6ff2;
-    text-decoration: none;
-  }
-  
-  a.link-primary:hover {
-    text-decoration: underline;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+}
+
+/* Login and Register Form Styles */
+.login-form-box, .register-form-box {
+  max-width: 420px;
+  margin-top: 1rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.form-heading {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.form-subtext {
+  font-size: 15px;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+.btn-outline-secondary {
+  color: var(--primary-color);
+  border-color: #d0d7df;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #e7f0ff;
+}
+
+/* Link Styles */
+a.link-primary {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a.link-primary:hover {
+  text-decoration: underline;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  background-color: var(--sidebar-color);
+  min-height: 100vh;
+  color: var(--text-light);
+}
+
+.sidebar a {
+  color: var(--text-light);
+  text-decoration: none;
+  display: block;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Card Stats */
+.card-stats .card {
+  min-width: 200px;
+}
+
+/* Badge Status */
+.badge-status {
+  padding: 0.4em 0.8em;
+  font-size: 0.8rem;
+  border-radius: 1rem;
+}
+
+.badge-status.completed {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.badge-status.pending {
+  background-color: #fff3cd;
+  color: #664d03;
+}
+
+.badge-status.confirmed {
+  background-color: #cfe2ff;
+  color: #084298;
+}

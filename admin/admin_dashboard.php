@@ -1,12 +1,14 @@
 <?php
     session_start();
     include '../Includes/dbConnection.php';
-    if(!isset($_SESSION['user_id'])){
-        echo "you are not logged in";
+    if(!$_SESSION['logged_in']){
+        header('Location:../auth/login.php');
         exit();
     }
 
-    $name = $_SESSION['name'];
+    $name = $_SESSION['full_name'];
+    $name_parts = explode(" ",$name);
+    $first_name = $name_parts[0];
 ?>
 
 <!DOCTYPE html>
@@ -44,9 +46,9 @@
           </div>
           <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              <span class="me-2">🟢</span>
+              <img src="../Uploads/default.png" alt="profile_pic" class="img-fluid rounded-circle" style="max-width: 60px;" alt="Profile">
               <?php
-              echo $name;
+              echo $first_name;
               ?>
             </button>
           </div>

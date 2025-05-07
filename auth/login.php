@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $user_data = mysqli_fetch_assoc($result);
 
     // Check if user exists and verify password
-    if($user_data && password_verify($password, $user_data['password'])) {
+    if ($user_data && password_verify($password, $user_data['password'])) {
         // Set session variables
         $_SESSION['logged_in'] = true;
         $_SESSION['user_id'] =  $user_data['user_id']; // Corrected: Use 'user_id' from the database
@@ -69,9 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <button class="btn btn-outline-primary btn-sm">Admin</button>
                     <button class="btn btn-outline-primary btn-sm">Doctor</button>
                     <button class="btn btn-outline-primary btn-sm">Patient</button>
+                    <button class="btn btn-outline-primary btn-sm">Reception</button>
                 </div>
             </div>
             <p class="mt-3 text-center">Don't have an account? <a href="signup.php" class="link-primary">Register</a></p>
+            <p class="text-center"><a href="forgot_password.php" class="link-primary">Forgot Password?</a></p>
         </div>
     </div>
 </body>

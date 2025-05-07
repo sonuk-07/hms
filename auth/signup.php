@@ -3,7 +3,7 @@ include '../Includes/dbConnection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = $_POST['full_name'];
-    $username = $_POST['username']; // Get the username from the form
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm_password'];
@@ -12,20 +12,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password === $confirmPassword) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        // Insert into users table
-        $sql = "INSERT INTO users (full_name, username, email, password, role) VALUES (?, ?, ?, ?, ?)"; // Added 'username' to the query
-        $stmt = mysqli_prepare($dbconn, $sql);
-        mysqli_stmt_bind_param($stmt, "sssss", $full_name, $username, $email, $hashedPassword, $role); // Bind the username
+        // Check for existing admin or receptionist
+        $check_role_query = "SELECT COUNT(*) FROM users WHERE role = ?";
+        $stmt_check = mysqli_prepare($dbconn, $check_role_query);
+        mysqli_stmt_bind_param($stmt_check, "s", $role);
+        mysqli_stmt_execute($stmt_check);
+        $result_check = mysqli_stmt_get_result($stmt_check);
+        $role_count = mysqli_fetch_array($result_check)[0];
+        mysqli_stmt_close($stmt_check);
 
-        if (mysqli_stmt_execute($stmt)) {
-            $user_id = mysqli_insert_id($dbconn);
-
-            // ... (rest of your code for inserting into role-specific tables remains the same) ...
-
-            header("Location: login.php");
-            exit();
+        if (($role == 'admin' || $role == 'reception') && $role_count > 0) {
+            echo "Error: Only one Admin and one Receptionist can exist!";
         } else {
-            echo "Error: " . mysqli_error($dbconn);
+
+            // Insert into users table
+            $sql = "INSERT INTO users (full_name, username, email, password, role) VALUES (?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($dbconn, $sql);
+            mysqli_stmt_bind_param($stmt, "sssss", $full_name, $username, $email, $hashedPassword, $role);
+
+            if (mysqli_stmt_execute($stmt)) {
+                $user_id = mysqli_insert_id($dbconn);
+
+                // ... (rest of your code for inserting into role-specific tables remains the same) ...
+
+                header("Location: login.php");
+                exit();
+            } else {
+                echo "Error: " . mysqli_error($dbconn);
+            }
         }
     } else {
         echo "Passwords do not match!";
@@ -41,7 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .hidden { display: none; }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-light">
